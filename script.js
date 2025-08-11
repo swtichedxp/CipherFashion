@@ -9,22 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.querySelector('i').classList.toggle('fa-times');
     });
 
-    // HERO SLIDER
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        slides.forEach(slide => {
-            slide.style.opacity = '0';
-        });
-        slides[index].style.opacity = '1';
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    showSlide(currentSlide);
+    // CHANGE NAVBAR COLOR ON SCROLL
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
 });
