@@ -44,12 +44,14 @@ a:hover {
 }
 
 /* HEADER ANIMATION */
+/* UPDATED NAVBAR */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    background: transparent;
+    background: rgba(26, 26, 26, 0.4); /* Reduced opacity for the blur effect */
+    backdrop-filter: blur(10px); /* The new glass effect */
     position: fixed;
     width: 100%;
     top: 0;
@@ -65,7 +67,8 @@ a:hover {
 }
 
 .navbar.scrolled {
-    background: rgba(26, 26, 26, 0.9);
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(0px); /* Remove blur when scrolled for a solid look */
 }
 
 .logo {
