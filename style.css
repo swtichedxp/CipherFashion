@@ -1,7 +1,7 @@
 :root {
-    --deep-blue-start: #000033;
-    --deep-blue-end: #000055;
-    --text-color: #f0f0f0;
+    --bg-dark: #111;
+    --text-light: #f0f0f0;
+    --accent: #FF00FF;
 }
 
 * {
@@ -11,35 +11,26 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, var(--deep-blue-start), var(--deep-blue-end));
-    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
     line-height: 1.6;
-}
-
-/* New gold gradient styling */
-.gold-text {
-    background: linear-gradient(120deg, #F0E68C, #DAA520, #B8860B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    scroll-behavior: smooth;
 }
 
 h1, h2 {
-    text-align: center;
+    font-weight: 600;
     text-transform: uppercase;
-    font-weight: 300;
 }
 
 a {
-    color: #ffd700; /* Revert to a solid gold for links for better readability */
+    color: var(--accent);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #fff;
+    color: var(--text-light);
 }
 
 .navbar {
@@ -47,126 +38,91 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
-    background: rgba(0, 0, 0, 0.5);
+    background: transparent;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(17, 17, 17, 0.9);
 }
 
 .logo {
     font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.logo h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
-    text-transform: none;
+    font-weight: 600;
+    color: var(--text-light);
 }
 
 .nav-links a {
     margin-left: 2rem;
-    font-size: 1rem;
-    transition: all 0.3s;
+    font-weight: 400;
 }
 
 .hamburger-menu {
     display: none;
     background: none;
     border: none;
-    color: #ffd700;
+    color: var(--text-light);
     font-size: 1.5rem;
     cursor: pointer;
 }
 
 /* HERO SECTION STYLING */
-.hero-slider {
-    position: relative;
+.hero-section {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    padding-top: 60px;
-}
-
-.hero-content {
-    position: absolute;
-    z-index: 2;
     text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 2rem;
-    border-radius: 10px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
 
 .hero-content h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 8vw, 5rem);
+    margin-bottom: 0.5rem;
 }
 
 .hero-content p {
-    font-size: 1.5rem;
-    color: var(--text-color);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.slider-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    animation: slide-show 15s infinite ease-in-out;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.slider-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-@keyframes slide-show {
-    0%, 33% { transform: translateX(0); }
-    33.01%, 66% { transform: translateX(-100%); }
-    66.01%, 100% { transform: translateX(-200%); }
-}
-
-.about-section, .contact-section {
-    padding: 5rem 10%;
+/* GENERAL SECTION STYLING */
+.about-section, .gallery-section, .contact-section {
+    padding: 8rem 5%;
     text-align: center;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 4rem;
+    color: var(--accent);
 }
 
 .about-section p {
     max-width: 800px;
     margin: 0 auto;
     font-size: 1.1rem;
+    line-height: 1.8;
 }
 
-.hero-text-banner {
-    background: #ffd700;
-    color: var(--deep-blue-start);
-    text-align: center;
-    padding: 3rem 10%;
-    font-size: 1.5rem;
-}
-
-.hero-text-banner h2 {
-    color: var(--deep-blue-start);
-    font-weight: 700;
-}
-
-.gallery-section {
-    padding: 5rem 5%;
-}
-
-.gallery-heading {
-    margin-bottom: 3rem;
-}
-
+/* GALLERY SECTION STYLING */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -174,9 +130,11 @@ a:hover {
 }
 
 .gallery-item {
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .gallery-item img, .gallery-item video {
@@ -184,13 +142,45 @@ a:hover {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
 }
 
-.item-1 { grid-column: span 2; grid-row: span 1; }
-.item-2 { grid-column: span 1; grid-row: span 2; }
-.item-3 { grid-column: span 1; grid-row: span 1; }
-.item-4 { grid-column: span 2; grid-row: span 2; }
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 255, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+.gallery-item:hover img, .gallery-item:hover video {
+    transform: scale(1.05);
+}
+
+/* CONTACT SECTION */
+.contact-info {
+    font-size: 1.1rem;
+    margin-top: 2rem;
+}
+
+.contact-info p {
+    margin: 1rem 0;
+}
+
+.contact-info i {
+    color: var(--accent);
+    margin-right: 10px;
+}
+
+/* RESPONSIVE STYLING */
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hamburger-menu { display: block; }
@@ -201,11 +191,12 @@ a:hover {
         position: absolute;
         top: 60px;
         left: 0;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(17, 17, 17, 0.9);
         padding: 1rem 0;
         text-align: center;
     }
     .nav-links a { margin: 1rem 0; }
     .gallery-grid { grid-template-columns: 1fr; }
     .item-1, .item-2, .item-3, .item-4, .item-5 { grid-column: span 1; grid-row: span 1; }
-    }
+    h2 { font-size: 1.5rem; margin-bottom: 2rem; }
+}
