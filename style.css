@@ -239,3 +239,35 @@ a:hover {
     .about-text-content { padding-right: 0; }
     .gallery-grid { grid-template-columns: 1fr; }
     }
+
+/* Existing CSS should remain */
+/* Header Animation */
+.navbar {
+opacity: 0;
+transform: translateY(-50px);
+transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+}
+.navbar.loaded {
+opacity: 1;
+transform: translateY(0);
+}
+/* Slide-in Animation */
+.animate-on-scroll {
+opacity: 0;
+transform: translateY(50px);
+transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+.animate-on-scroll.animated {
+opacity: 1;
+transform: translateY(0);
+}
+@keyframes slideInUp {
+from {
+opacity: 0;
+transform: translateY(50px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
